@@ -7,6 +7,7 @@
     "plugin:jest/recommended",
     "plugin:jest/style",
     "plugin:testing-library/react",
+    "prettier",
     "next",
     "next/core-web-vitals"
   ],
@@ -15,6 +16,17 @@
     "project": "./tsconfig.json",
     "ecmaVersion": "latest",
     "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".ts", ".tsx"]
+      }
+    }
   },
   "rules": {}
 }
