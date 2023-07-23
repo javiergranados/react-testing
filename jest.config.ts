@@ -13,7 +13,7 @@ const jestConfig: JestConfigWithTsJest = {
       },
     ],
   },
-  setupFilesAfterEnv: ['./setup-jest.ts'],
+  setupFilesAfterEnv: ['./jest-setup.ts'],
   coverageThreshold: {
     global: {
       branches: 100,
