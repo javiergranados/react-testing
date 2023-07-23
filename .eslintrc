@@ -28,5 +28,7 @@
       }
     }
   },
-  "rules": {}
+  "rules": {
+    "testing-library/no-render-in-setup": ["error", { "allowTestingFrameworkSetupHook": "beforeEach" }]
+  }
 }

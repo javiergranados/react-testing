@@ -24,11 +24,11 @@ export const Counter: React.FC<CounterProps> = ({ description, defaultCount }) =
           type="number"
         />
       </label>
-      <button aria-label="Subtract from Counter" onClick={() => setCount(count - incrementor)}>
+      <button aria-label="Decrement counter" onClick={() => setCount(count - incrementor)}>
         -
       </button>
       Current Count: {count}
-      <button aria-label="Add to Counter" onClick={() => setCount(count + incrementor)}>
+      <button aria-label="Increment counter" onClick={() => setCount(count + incrementor)}>
         +
       </button>
     </div>
