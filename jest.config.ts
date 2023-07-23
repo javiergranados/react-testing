@@ -1,19 +1,19 @@
-import type { JestConfigWithTsJest } from "ts-jest";
+import type { JestConfigWithTsJest } from 'ts-jest'
 
 const jestConfig: JestConfigWithTsJest = {
-  preset: "ts-jest",
-  testEnvironment: "jsdom",
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
   transform: {
     // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
     // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
-    "^.+\\.tsx?$": [
-      "ts-jest",
+    '^.+\\.tsx?$': [
+      'ts-jest',
       {
-        tsconfig: "./tsconfig.jest.json",
+        tsconfig: './tsconfig.jest.json',
       },
     ],
   },
-  setupFilesAfterEnv: ["./setup-jest.ts"],
+  setupFilesAfterEnv: ['./setup-jest.ts'],
   coverageThreshold: {
     global: {
       branches: 100,
@@ -22,6 +22,6 @@ const jestConfig: JestConfigWithTsJest = {
       statements: 100,
     },
   },
-};
+}
 
-export default jestConfig;
+export default jestConfig
