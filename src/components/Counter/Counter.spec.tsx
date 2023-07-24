@@ -1,9 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Counter } from '.'
 
 describe('Counter', () => {
   describe('initialized with defaultCount=0 and description="My Counter"', () => {
+    const user = userEvent.setup()
     beforeEach(() => {
       render(<Counter defaultCount={0} description="My Counter" />)
     })
@@ -17,8 +18,9 @@ describe('Counter', () => {
     })
 
     describe('when + is clicked', () => {
-      beforeEach(() => {
-        fireEvent.click(screen.getByRole('button', { name: 'Increment counter' }))
+      beforeEach(async () => {
+        const button = screen.getByRole('button', { name: 'Increment counter' })
+        await user.click(button)
       })
 
       it('renders "Current Count: 1"', () => {
@@ -27,8 +29,9 @@ describe('Counter', () => {
     })
 
     describe('when - is clicked', () => {
-      beforeEach(() => {
-        fireEvent.click(screen.getByRole('button', { name: 'Decrement counter' }))
+      beforeEach(async () => {
+        const button = screen.getByRole('button', { name: 'Decrement counter' })
+        await user.click(button)
       })
 
       it('renders "Current Count: -1"', () => {
