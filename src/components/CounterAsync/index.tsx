@@ -1,34 +1,40 @@
 import { useState } from 'react'
 
 type CounterAsyncProps = Readonly<{
-  description: string
-  defaultCount: number
+  defaultCount?: number
 }>
 
-export const CounterAsync: React.FC<CounterAsyncProps> = ({ description, defaultCount }) => {
+export const CounterAsync: React.FC<CounterAsyncProps> = ({ defaultCount = 0 }) => {
   const [count, setCount] = useState(defaultCount)
   const [incrementor, setIncrementor] = useState(1)
 
+  const handleDecrement = () => {
+    setCount(count - incrementor)
+  }
+  const handleIncrement = () => {
+    setTimeout(() => {
+      setCount(count + incrementor)
+    }, 200)
+  }
+
   return (
     <div>
-      <h2>
-        DESC: {description} - DC: {defaultCount}
-      </h2>
+      <h2>{`Default Count: ${defaultCount}`}</h2>
       <label>
         Incrementor:
         <input
+          type="number"
           value={incrementor}
           onChange={(evt) => {
             setIncrementor(parseInt(evt.target.value) || 1)
           }}
-          type="number"
         />
       </label>
-      <button aria-label="Decrement counter" onClick={() => setCount(count - incrementor)}>
+      <button aria-label="decrement" onClick={handleDecrement}>
         -
       </button>
       Current Count: {count}
-      <button aria-label="Increment counter" onClick={() => setCount(count + incrementor)}>
+      <button aria-label="increment" onClick={handleIncrement}>
         +
       </button>
     </div>
