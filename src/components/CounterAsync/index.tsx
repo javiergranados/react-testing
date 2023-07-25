@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type CounterAsyncProps = Readonly<{
   defaultCount?: number
@@ -7,6 +7,7 @@ type CounterAsyncProps = Readonly<{
 export const CounterAsync: React.FC<CounterAsyncProps> = ({ defaultCount = 0 }) => {
   const [count, setCount] = useState(defaultCount)
   const [incrementor, setIncrementor] = useState(1)
+  const [quoteVisible, setQuoteVisible] = useState(defaultCount < 15)
 
   const handleDecrement = () => {
     setCount(count - incrementor)
@@ -16,6 +17,16 @@ export const CounterAsync: React.FC<CounterAsyncProps> = ({ defaultCount = 0 }) 
       setCount(count + incrementor)
     }, 200)
   }
+
+  useEffect(() => {
+    const id: NodeJS.Timeout = setTimeout(() => {
+      setQuoteVisible(count < 15)
+    }, 300)
+
+    return () => {
+      clearTimeout(id)
+    }
+  }, [count])
 
   return (
     <div>
@@ -37,6 +48,8 @@ export const CounterAsync: React.FC<CounterAsyncProps> = ({ defaultCount = 0 }) 
       <button aria-label="increment" onClick={handleIncrement}>
         +
       </button>
+      <br />
+      {quoteVisible && <q>{`Shown until current count >= 15`}</q>}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { CounterAsync } from '.'
 
@@ -62,6 +62,12 @@ describe('CounterAsync', () => {
 
       it('renders "Current Count: 15"', () => {
         expect(screen.getByText('Current Count: 15')).toBeInTheDocument()
+      })
+
+      it('quote dissapears after 300ms', async () => {
+        const quote = screen.getByText('Shown until current count >= 15')
+        await waitForElementToBeRemoved(quote)
+        expect(quote).not.toBeInTheDocument()
       })
 
       describe('when the incrementor changes to empty string and + is clicked', () => {
