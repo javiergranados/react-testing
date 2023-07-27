@@ -1,4 +1,4 @@
-import { VeryComplex } from '@/common/deepFolder/deeperFolder/VeryComplex'
+import { VeryComplex } from '../../common/deepFolder/deeperFolder/VeryComplex'
 
 export function Example5() {
   return (
