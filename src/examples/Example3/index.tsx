@@ -1,16 +1,16 @@
 import { Button, SwipeableDrawer } from '@material-ui/core'
 import React, { useState } from 'react'
 
-export function MyDrawer() {
+export const Example3: React.FC = () => {
   const [opened, setOpened] = useState(false)
   return (
     <div>
-      <h2>Hello Drawer Component!</h2>
-      <Button variant="contained" onClick={() => setOpened(true)}>
+      <h2>Example3</h2>
+      <Button variant="contained" aria-label="open" onClick={() => setOpened(true)}>
         Open Drawer
       </Button>
       <SwipeableDrawer anchor="right" open={opened} onClose={() => setOpened(false)} onOpen={() => setOpened(true)}>
-        Hello YouTube!
+        Swipeable Drawer
       </SwipeableDrawer>
     </div>
   )
