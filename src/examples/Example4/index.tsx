@@ -1,5 +1,5 @@
-import { MyDrawer } from '../Example3'
+import { Example3 } from '../Example3'
 
 export function Example4() {
-  return <MyDrawer />
+  return <Example3 />
 }
