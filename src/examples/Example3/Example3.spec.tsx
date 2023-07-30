@@ -13,12 +13,19 @@ jest.mock('@material-ui/core', () => ({
 const mockedSwipeableDrawer = jest.mocked(SwipeableDrawer)
 
 describe('Example3', () => {
-  it('renders with SwipeableDrawer component mocked"', async () => {
+  it('renders with SwipeableDrawer component mocked"', () => {
+    mockedSwipeableDrawer.mockClear()
+    render(<Example3 />)
+
+    expect(screen.getByText(/Mocked Component/)).toBeInTheDocument()
+  })
+
+  it('cliking on Button component renders SwipeableDrawer component mocked"', async () => {
     const user = userEvent.setup()
     mockedSwipeableDrawer.mockClear()
     render(<Example3 />)
 
-    await user.click(screen.getByRole('button', { name: 'open' })) // not necessary, but with this we check the button is rendered correctly
+    await user.click(screen.getByRole('button', { name: 'open' })) // we check the button is rendered correctly
     expect(screen.getByText(/Mocked Component/)).toBeInTheDocument()
   })
 })
