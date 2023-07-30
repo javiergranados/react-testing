@@ -22,6 +22,9 @@ const jestConfig: JestConfigWithTsJest = {
       statements: 90,
     },
   },
+  moduleNameMapper: {
+    '\\.(css)$': 'identity-obj-proxy',
+  },
 }
 
 export default jestConfig
