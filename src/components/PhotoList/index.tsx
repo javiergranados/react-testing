@@ -15,7 +15,9 @@ export function PhotoList() {
 
   return (
     <div>
-      <button onClick={() => setRefresh((cr) => ++cr)}>Refresh</button>
+      <button aria-label="refresh" onClick={() => setRefresh((cr) => ++cr)}>
+        Refresh
+      </button>
       <div>
         <label>
           Your Name:
@@ -87,6 +89,7 @@ function PhotoDetail({ photo }: { photo: Photo }) {
         <h3>PhotoId: {photo.id}</h3>
 
         <button
+          aria-label="favourites"
           onClick={() => {
             void axios.post<Photo>('/api/favourite', { ...photo, favourite }).then((response) => {
               setFavourite(response.data.favourite)

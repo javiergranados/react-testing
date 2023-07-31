@@ -5,6 +5,7 @@ const defaultHandlers = [
   rest.get('/api/photos', (req, res, ctx) => {
     const name = req.url.searchParams.get('name') || 'Unknown'
     return res(
+      ctx.delay(100),
       ctx.json<Photo[]>([
         {
           id: 1,
@@ -18,7 +19,7 @@ const defaultHandlers = [
 
   rest.post('/api/favourite', async (req, res, ctx) => {
     const photo: Photo = await req.json()
-    return res(ctx.delay(200), ctx.json<Photo>({ ...photo, favourite: !photo.favourite }))
+    return res(ctx.json<Photo>({ ...photo, favourite: !photo.favourite }))
   }),
 ]
 
