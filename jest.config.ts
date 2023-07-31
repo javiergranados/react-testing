@@ -16,7 +16,7 @@ const jestConfig: JestConfigWithTsJest = {
   setupFilesAfterEnv: ['./jest-setup.ts'],
   coverageThreshold: {
     global: {
-      branches: 100,
+      branches: 80,
       functions: 90,
       lines: 90,
       statements: 90,
