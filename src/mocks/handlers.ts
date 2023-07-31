@@ -1,4 +1,4 @@
-import { Photo } from '@/common/types'
+import { CustomApiError, Photo } from '@/common/types'
 import { rest } from 'msw'
 
 const defaultHandlers = [
@@ -27,4 +27,20 @@ const errorHandler = rest.get('/api/photos', (req, res, ctx) => {
   return res(ctx.status(500), ctx.json<{ message: string }>({ message: 'Sorry Something happened!' }))
 })
 
-export { defaultHandlers, errorHandler }
+const swrHandlers = [
+  rest.get('/api/cars/france', (_req, res, ctx) => {
+    return res(ctx.delay(100), ctx.json<string[]>(['Mocked France Brand 1', 'Mocked France Brand 2']))
+  }),
+  rest.get('/api/cars/germany', (_req, res, ctx) => {
+    return res(ctx.delay(100), ctx.json<string[]>(['Mocked Germany Brand 1', 'Mocked Germany Brand 2']))
+  }),
+  rest.get('/api/cars/italy', (_req, res, ctx) => {
+    return res(ctx.delay(100), ctx.status(500), ctx.json<CustomApiError>({ message: 'Mocked error message' }))
+  }),
+]
+
+const swrEmptyResponseHandler = rest.get('/api/cars/france', (req, res, ctx) => {
+  return res(ctx.delay(100), ctx.status(200), ctx.json<string[]>([]))
+})
+
+export { defaultHandlers, errorHandler, swrHandlers, swrEmptyResponseHandler }
