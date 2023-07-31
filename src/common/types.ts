@@ -4,3 +4,7 @@ export interface Photo {
   thumbnailUrl: string
   favourite: boolean
 }
+
+export interface CustomApiError {
+  message: string
+}
