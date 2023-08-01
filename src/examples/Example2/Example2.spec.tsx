@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { Example2, ROWS } from '.'
-import { DataGrid } from '@material-ui/data-grid'
+import { COLUMNS, Example2, ROWS } from '.'
+import { DataGrid } from '@mui/x-data-grid'
 
-jest.mock('@material-ui/data-grid', () => ({
+jest.mock('@mui/x-data-grid', () => ({
   DataGrid: jest.fn(() => <div>Table</div>),
 }))
 
@@ -27,13 +27,7 @@ describe('Example2', () => {
     expect(mockedDataGrid).toHaveBeenLastCalledWith(
       {
         rows: ROWS,
-        columns: [
-          expect.objectContaining({ field: 'id' }),
-          expect.objectContaining({ field: 'firstName' }),
-          expect.objectContaining({ field: 'lastName' }),
-          expect.objectContaining({ field: 'age' }),
-        ],
-        pageSize: 5,
+        columns: COLUMNS,
         checkboxSelection: true,
       },
       {}

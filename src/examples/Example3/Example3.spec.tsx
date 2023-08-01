@@ -1,12 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 import { Example3 } from './'
-import { SwipeableDrawer } from '@material-ui/core'
-
+import { SwipeableDrawer } from '@mui/material'
 import userEvent from '@testing-library/user-event'
 
-jest.mock('@material-ui/core', () => ({
-  ...jest.requireActual<typeof import('@material-ui/core')>('@material-ui/core'),
+jest.mock('@mui/material', () => ({
+  ...jest.requireActual<typeof import('@mui/material')>('@mui/material'),
   SwipeableDrawer: jest.fn(() => <div>Mocked Component</div>),
 }))
 

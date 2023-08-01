@@ -1,5 +1,5 @@
-import { Button } from '@material-ui/core'
-import { DataGrid } from '@material-ui/data-grid'
+import { Button } from '@mui/material'
+import { DataGrid } from '@mui/x-data-grid'
 import React from 'react'
 
 export const ROWS = [
@@ -14,7 +14,7 @@ export const ROWS = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ]
 
-const COLUMNS = [
+export const COLUMNS = [
   { field: 'id', headerName: 'ID', width: 100 },
   {
     field: 'firstName',
@@ -48,7 +48,7 @@ export const Example2: React.FC<Example2Props> = ({ onMoney }) => {
         Give me 33 dollars
       </Button>
       <div style={{ height: 400, width: '100%' }}>
-        <DataGrid rows={ROWS} columns={COLUMNS} pageSize={5} checkboxSelection />
+        <DataGrid rows={ROWS} columns={COLUMNS} checkboxSelection />
       </div>
     </div>
   )

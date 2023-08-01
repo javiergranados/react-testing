@@ -1,4 +1,4 @@
-import { Button, SwipeableDrawer } from '@material-ui/core'
+import { SwipeableDrawer, Button } from '@mui/material'
 import React, { useState } from 'react'
 
 export const Example3: React.FC = () => {
