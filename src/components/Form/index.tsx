@@ -1,24 +1,11 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CircularProgress,
-  FormControl,
-  Grid,
-  InputLabel,
-  // MenuItem,
-  Step,
-  StepLabel,
-  Stepper,
-  // TextField as RealTextField,
-  FormHelperText,
-  // NativeSelect,
-} from '@mui/material'
-import { ErrorMessage, Field, Form as FormLib, Formik, FormikConfig, FormikValues, useField } from 'formik'
-import { CheckboxWithLabel, TextField, Select, TextFieldProps } from 'formik-mui'
-import React, { useState } from 'react'
+import React from 'react'
+import { Box, Card, CardContent } from '@mui/material'
+import { Field } from 'formik'
+import { CheckboxWithLabel, TextField } from 'formik-mui'
 import { number, object, string } from 'yup'
+import { Dropdown } from './components/Dropdown'
+import { TextFieldWithErrorMessage } from './components/TextFieldWithErrorMessage'
+import { FormikStepper, FormikStep } from './components/FormikStepper'
 
 const sleep = (time: number) => new Promise((acc) => setTimeout(acc, time))
 
@@ -66,31 +53,14 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
             })}
           >
             <Box paddingBottom={2}>
-              <Field
-                id="firstName"
-                fullWidth
-                name="firstName"
-                component={TextField}
-                // component={CustomTextFieldWithErrorMessage}
-                label="First Name"
-              />
+              <Field id="firstName" fullWidth name="firstName" component={TextField} label="First Name" />
             </Box>
-
             <Box paddingBottom={2}>
-              <CustomDropdown name="job" />
+              <Dropdown name="job" />
             </Box>
-
             <Box paddingBottom={2}>
-              <Field
-                id="city"
-                fullWidth
-                name="city"
-                // component={CustomTextFieldWithErrorMessage}
-                component={TextField}
-                label="City"
-              />
+              <Field id="city" fullWidth name="city" component={TextField} label="City" />
             </Box>
-
             <Box paddingBottom={2}>
               <Field
                 name="millionaire"
@@ -120,7 +90,7 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
                 name="money"
                 id="money"
                 type="number"
-                component={CustomTextFieldWithErrorMessage}
+                component={TextFieldWithErrorMessage}
                 label="All the money I have"
               />
             </Box>
@@ -133,157 +103,5 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
         </FormikStepper>
       </CardContent>
     </Card>
-  )
-}
-
-interface FormikStepProps extends Pick<FormikConfig<FormikValues>, 'children' | 'validationSchema'> {
-  label: string
-}
-
-function FormikStep({ children }: FormikStepProps) {
-  return <>{children}</>
-}
-
-function FormikStepper<MyFormValues extends FormikValues>({ children, ...props }: FormikConfig<MyFormValues>) {
-  const childrenArray = React.Children.toArray(children as React.ReactNode[]) as React.ReactElement<FormikStepProps>[]
-  const [step, setStep] = useState(0)
-  const currentChild = childrenArray[step]
-  const [completed, setCompleted] = useState(false)
-
-  function isLastStep() {
-    return step === childrenArray.length - 1
-  }
-
-  return (
-    <Formik<MyFormValues>
-      {...props}
-      // eslint-disable-next-line
-      validationSchema={currentChild.props.validationSchema}
-      onSubmit={async (values, helpers) => {
-        if (isLastStep()) {
-          await props.onSubmit(values, helpers)
-          setCompleted(true)
-        } else {
-          setStep((s) => s + 1)
-
-          // the next line was not covered in the youtube video
-          //
-          // If you have multiple fields on the same step
-          // we will see they show the validation error all at the same time after the first step!
-          //
-          // If you want to keep that behaviour, then, comment the next line :)
-          // If you want the second/third/fourth/etc steps with the same behaviour
-          //    as the first step regarding validation errors, then the next line is for you! =)
-          //
-          // In the example of the video, it doesn't make any difference, because we only
-          //    have one field with validation in the second step :)
-          helpers.setTouched({})
-        }
-      }}
-    >
-      {({ isSubmitting }) => (
-        <FormLib autoComplete="off">
-          <Stepper alternativeLabel activeStep={step}>
-            {childrenArray.map((child, index) => (
-              <Step key={child.props.label} completed={step > index || completed}>
-                <StepLabel>{child.props.label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-
-          {currentChild}
-
-          <Grid container spacing={2}>
-            {step > 0 ? (
-              <Grid item>
-                <Button
-                  disabled={isSubmitting}
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setStep((s) => s - 1)}
-                >
-                  Back
-                </Button>
-              </Grid>
-            ) : null}
-            <Grid item>
-              <Button
-                startIcon={isSubmitting ? <CircularProgress size="1rem" /> : null}
-                disabled={isSubmitting}
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                {isSubmitting ? 'Submitting' : isLastStep() ? 'Submit' : 'Next'}
-              </Button>
-            </Grid>
-          </Grid>
-        </FormLib>
-      )}
-    </Formik>
-  )
-}
-
-function CustomDropdown({ name }: { name: string }) {
-  const [field, props] = useField(name)
-
-  return (
-    <FormControl fullWidth error={!!props.error}>
-      <InputLabel htmlFor="job" />
-      <Field
-        component={Select}
-        native
-        name="job"
-        inputProps={{
-          id: 'job',
-          'aria-label': 'Without label',
-        }}
-        value={field.value as string}
-      >
-        {field.value !== 'EMPTY' ? null : <option value="EMPTY">Select your job situation</option>}
-        <option value="FULL">Full-Time</option>
-        <option value="PART">Part-Time</option>
-        <option value="UNEMPLOYED">Unemployed</option>
-      </Field>
-      <ErrorMessage name="job">{(message: React.ReactNode) => <FormHelperText>{message}</FormHelperText>}</ErrorMessage>
-    </FormControl>
-  )
-
-  // return (
-  //   <FormControl fullWidth error={!!props.error && props.touched}>
-  //     <InputLabel htmlFor="job">Job Situation</InputLabel>
-  //     <Field
-  //       component={Select}
-  //       name="job"
-  //       inputProps={{
-  //         id: 'job',
-  //         'aria-errormessage': props.error ? 'job-error' : null,
-  //       }}
-  //     >
-  //       {field.value !== 'EMPTY' ? null : (
-  //         <MenuItem value="EMPTY">Select your job situation</MenuItem>
-  //       )}
-  //       <MenuItem value="FULL">Full-Time</MenuItem>
-  //       <MenuItem value="PART">Part-Time</MenuItem>
-  //       <MenuItem value="UNEMPLOYED">Unemployed</MenuItem>
-  //     </Field>
-  //     <ErrorMessage name="job">
-  //       {(message) => <FormHelperText id="job-error">{message}</FormHelperText>}
-  //     </ErrorMessage>
-  //   </FormControl>
-  // );
-}
-
-function CustomTextFieldWithErrorMessage(props: TextFieldProps) {
-  const hasError = !!props.form.errors[props.field.name]
-
-  return (
-    <TextField
-      {...props}
-      inputProps={{
-        ...props.inputProps,
-        'aria-errormessage': hasError ? `${props.field.name}-helper-text` : undefined,
-      }}
-    />
   )
 }
