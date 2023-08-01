@@ -3,7 +3,7 @@ import { Box, Card, CardContent } from '@mui/material'
 import { Field } from 'formik'
 import { CheckboxWithLabel, TextField } from 'formik-mui'
 import { number, object, string } from 'yup'
-import { Dropdown } from './components/Dropdown'
+import { JobSituationDropdown } from './components/JobSituationDropdown'
 import { TextFieldWithErrorMessage } from './components/TextFieldWithErrorMessage'
 import { FormikStepper, FormikStep } from './components/FormikStepper'
 
@@ -62,7 +62,7 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
               />
             </Box>
             <Box paddingBottom={2}>
-              <Dropdown name="job" />
+              <JobSituationDropdown />
             </Box>
             <Box paddingBottom={2}>
               <Field id="city" fullWidth name="city" component={TextFieldWithErrorMessage} label="City" />

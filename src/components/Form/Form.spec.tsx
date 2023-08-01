@@ -9,12 +9,12 @@ function getFirstName() {
   return screen.getByRole('textbox', { name: /first name/i })
 }
 
-function getSelectJobSituation() {
+function getJobSituation() {
   return screen.getByRole('combobox', { name: /job situation/i })
 }
 
 async function selectJobSituation(jobSituation: string) {
-  const dropdown = getSelectJobSituation()
+  const dropdown = getJobSituation()
   await user.selectOptions(dropdown, within(dropdown).getByRole('option', { name: jobSituation }))
 }
 
@@ -91,6 +91,6 @@ describe('Form', () => {
 
     expect(getFirstName()).toHaveAccessibleErrorMessage('Your First Name is Required')
     expect(getCity()).toHaveAccessibleErrorMessage('city is a required field')
-    expect(getSelectJobSituation()).toHaveAccessibleErrorMessage('You need to select your job situation')
+    expect(getJobSituation()).toHaveAccessibleErrorMessage('You need to select your job situation')
   })
 })

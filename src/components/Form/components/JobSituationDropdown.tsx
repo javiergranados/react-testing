@@ -2,8 +2,8 @@ import { FormControl, FormHelperText, InputLabel } from '@mui/material'
 import { ErrorMessage, Field, useField } from 'formik'
 import { Select } from 'formik-mui'
 
-export function Dropdown({ name }: { name: string }) {
-  const [field, props] = useField(name)
+export function JobSituationDropdown() {
+  const [field, props] = useField('job')
 
   return (
     <FormControl fullWidth error={!!props.error}>
