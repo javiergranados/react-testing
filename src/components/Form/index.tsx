@@ -53,13 +53,19 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
             })}
           >
             <Box paddingBottom={2}>
-              <Field id="firstName" fullWidth name="firstName" component={TextField} label="First Name" />
+              <Field
+                id="firstName"
+                fullWidth
+                name="firstName"
+                component={TextFieldWithErrorMessage}
+                label="First Name"
+              />
             </Box>
             <Box paddingBottom={2}>
               <Dropdown name="job" />
             </Box>
             <Box paddingBottom={2}>
-              <Field id="city" fullWidth name="city" component={TextField} label="City" />
+              <Field id="city" fullWidth name="city" component={TextFieldWithErrorMessage} label="City" />
             </Box>
             <Box paddingBottom={2}>
               <Field

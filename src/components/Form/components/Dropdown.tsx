@@ -1,5 +1,5 @@
-import { FormControl, InputLabel } from '@mui/material'
-import { Field, useField } from 'formik'
+import { FormControl, FormHelperText, InputLabel } from '@mui/material'
+import { ErrorMessage, Field, useField } from 'formik'
 import { Select } from 'formik-mui'
 
 export function Dropdown({ name }: { name: string }) {
@@ -7,7 +7,7 @@ export function Dropdown({ name }: { name: string }) {
 
   return (
     <FormControl fullWidth error={!!props.error}>
-      <InputLabel htmlFor="job" />
+      <InputLabel id="job" />
       <Field
         component={Select}
         native
@@ -15,6 +15,7 @@ export function Dropdown({ name }: { name: string }) {
         inputProps={{
           id: 'job',
           'aria-label': 'job situation',
+          'aria-errormessage': props.error ? 'job-error' : null,
         }}
         value={field.value as string}
       >
@@ -23,6 +24,13 @@ export function Dropdown({ name }: { name: string }) {
         <option value="PART">Part-Time</option>
         <option value="UNEMPLOYED">Unemployed</option>
       </Field>
+      <ErrorMessage name="job">
+        {(message: string) => (
+          <FormHelperText id="job-error" sx={{ display: 'none' }}>
+            {message}
+          </FormHelperText>
+        )}
+      </ErrorMessage>
     </FormControl>
   )
 }

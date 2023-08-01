@@ -85,4 +85,12 @@ describe('Form', () => {
 
     expect(onSubmit).toHaveBeenCalledTimes(1)
   })
+
+  it('has 3 required fields on first step', async () => {
+    await clickNextButton()
+
+    expect(getFirstName()).toHaveAccessibleErrorMessage('Your First Name is Required')
+    expect(getCity()).toHaveAccessibleErrorMessage('city is a required field')
+    expect(getSelectJobSituation()).toHaveAccessibleErrorMessage('You need to select your job situation')
+  })
 })
