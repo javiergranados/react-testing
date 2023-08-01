@@ -20,12 +20,15 @@
     "@mui/material": "^5.14.2",
     "@mui/x-data-grid": "^6.10.2",
     "axios": "^1.4.0",
+    "formik": "^2.4.2",
+    "formik-mui": "^5.0.0-alpha.0",
     "msw": "^1.2.3",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.2.0",
-    "whatwg-fetch": "^3.6.17"
+    "whatwg-fetch": "^3.6.17",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^9.3.1",
@@ -36,6 +39,7 @@
     "@types/node": "20.4.4",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
+    "@types/yup": "^0.32.0",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "eslint": "8.45.0",
