@@ -14,7 +14,7 @@ export function Dropdown({ name }: { name: string }) {
         name="job"
         inputProps={{
           id: 'job',
-          'aria-label': 'Without label',
+          'aria-label': 'job situation',
         }}
         value={field.value as string}
       >
