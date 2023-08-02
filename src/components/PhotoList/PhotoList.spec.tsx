@@ -1,7 +1,7 @@
 import { screen, render, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { server } from '../../mocks/server'
-import { errorHandler } from '../../mocks/handlers'
+import { server } from '@//mocks/server'
+import { errorHandler } from '@//mocks/handlers'
 import { PhotoList } from '.'
 
 beforeAll(() => server.listen())

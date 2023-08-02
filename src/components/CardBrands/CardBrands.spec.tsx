@@ -1,9 +1,9 @@
-import { render, RenderOptions, screen, waitForElementToBeRemoved } from '@testing-library/react'
-import { CarBrands } from '.'
-import { server } from '../../mocks/swrServer'
 import React from 'react'
+import { render, RenderOptions, screen, waitForElementToBeRemoved } from '@testing-library/react'
 import { SWRConfig } from '../../common/swr/SWRConfig'
-import { swrEmptyResponseHandler } from '../..//mocks/handlers'
+import { server } from '@/mocks/swrServer'
+import { swrEmptyResponseHandler } from '@/mocks/handlers'
+import { CarBrands } from '.'
 
 beforeAll(() => server.listen())
 afterAll(() => server.close())
