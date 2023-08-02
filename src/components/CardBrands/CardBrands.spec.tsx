@@ -1,6 +1,5 @@
 import { render, RenderOptions, screen, waitForElementToBeRemoved } from '@testing-library/react'
 import { CarBrands } from '.'
-// import { rest } from 'msw'
 import { server } from '../../mocks/swrServer'
 import React from 'react'
 import { SWRConfig } from '../../common/swr/SWRConfig'
